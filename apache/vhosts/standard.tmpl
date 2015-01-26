@@ -19,6 +19,12 @@
     'LogFormat': site.get('LogFormat', '"%h %l %u %t \\\"%r\\\" %>s %O"'),
     'CustomLog': site.get('CustomLog', '{0}/{1}-access.log'.format(map.logdir, sitename)),
 
+    'SSLEngine': site.get('SSLEngine', 'Off'),
+    'SSLCertificateFile': site.get('SSLCertificateFile', False),
+    'SSLCertificateKeyFile': site.get('SSLCertificateKeyFile', False),
+    'SSLCACertificateFile': site.get('SSLCACertificateFile', False),
+    'SSLCertificateChainFile': site.get('SSLCertificateChainFile', False),
+
     'DocumentRoot': site.get('DocumentRoot', '{0}/{1}'.format(map.wwwdir, sitename)),
     'VirtualDocumentRoot': site.get('VirtualDocumentRoot'),
 
@@ -47,6 +53,13 @@
 
     {% if site.get('DocumentRoot') != False %}DocumentRoot {{ vals.DocumentRoot }}{% endif %}
     {% if site.get('VirtualDocumentRoot') %}VirtualDocumentRoot {{ vals.VirtualDocumentRoot }}{% endif %}
+
+    {% if site.get('SSLEngine') %}SSLEngine {{ vals.SSLEngine }}
+    {% if vals.SSLCertificateFile != False %}SSLCertificateFile {{ vals.SSLCertificateFile }}{% endif %}
+    {% if vals.SSLCertificateKeyFile != False %}SSLCertificateKeyFile {{ vals.SSLCertificateKeyFile }}{% endif %}
+    {% if vals.SSLCACertificateFile != False %}SSLCACertificateFile {{ vals.SSLCACertificateFile }}{% endif %}
+    {% if vals.SSLCertificateChainFile != False %}SSLCertificateChainFile {{ vals.SSLCertificateChainFile }}{% endif %}
+    {% endif %}
 
     {% for path, dir in site.get('Directory', {}).items() %}
     {% set dvals = {

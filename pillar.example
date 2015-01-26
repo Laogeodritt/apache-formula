@@ -44,6 +44,14 @@ apache:
 
       DocumentRoot: /path/to/www/dir/example.com # E.g., /var/www/example.com
 
+      # This needs to be quoted, otherwise jinja interprets it as boolean and
+      # will insert "true" or "false" into the conf, causing Apache to complain
+      SSLEngine: 'Off'
+      SSLCertificateFile: false
+      SSLCertificateKeyFile: false
+      SSLCACertificateFile: false
+      SSLCertificateChainFile: false
+
       Directory:
         # "default" is a special case; Adds ``/path/to/www/dir/example.com``
         # E.g.: /var/www/example.com
